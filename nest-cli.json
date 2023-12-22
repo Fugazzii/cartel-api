@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/cocaines/src",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/cocaines/tsconfig.app.json"
+  },
+  "monorepo": true,
+  "root": "apps/cartel-api",
+  "projects": {
+    "members": {
+      "type": "application",
+      "root": "apps/members",
+      "entryFile": "main",
+      "sourceRoot": "apps/members/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/members/tsconfig.app.json"
+      }
+    },
+    "cocaines": {
+      "type": "application",
+      "root": "apps/cocaines",
+      "entryFile": "main",
+      "sourceRoot": "apps/cocaines/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/cocaines/tsconfig.app.json"
+      }
+    }
+  }
+}

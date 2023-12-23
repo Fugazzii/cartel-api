@@ -1,1 +1,1 @@
-export * from "../domain/constants";
+export * from "./tokens/repository.tokens";

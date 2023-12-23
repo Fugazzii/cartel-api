@@ -1,22 +1,17 @@
 import { DynamicModule, Module } from '@nestjs/common';
-import { NatsService } from './nats.service';
-import { NATS_TOKEN } from './nats.token';
+import { NATS_TOKEN, provideNats } from './nats.provider';
 
 @Module({})
 export class NatsModule {
   public static forRoot(natsUrl: string): DynamicModule {
 
-    const NatsProvider = Object.freeze({
-      provide: NATS_TOKEN,
-      useValue: new NatsService(natsUrl)
-    });
+    const NatsProvider = provideNats(natsUrl);
 
     return {
       module: NatsModule,
       providers: [NatsProvider],
-      exports: [NatsProvider]
+      exports: [NATS_TOKEN, NatsProvider]
     };
-
   }
 }
 

@@ -1,6 +1,6 @@
 export interface ICacheRepository {
-	save(key: string, value: any): Promise<void>;
-	retrieve<T>(key: string): Promise<T>;
-	remove(key: string): Promise<void>;
-	clear(): Promise<void>;
+	save<T>(key: string, value: T, time?: number): Promise<unknown>;
+	retrieve(key: string): Promise<string>;
+	remove(key: string): Promise<unknown>;
+	clear(): Promise<unknown>;
 }

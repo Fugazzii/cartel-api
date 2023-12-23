@@ -12,27 +12,27 @@ export class RedisService {
 		this.redisClient = new Redis({ host, port });
 	}
 
-	public async get(key: RedisKey): Promise<string | null> {
-		return await this.redisClient.get(key);
+	public get(key: RedisKey): Promise<string | null> {
+		return this.redisClient.get(key);
 	}
 
-	public async set(
+	public set(
 		key: RedisKey,
 		value: RedisValue,
 		expireTime?: number
-	): Promise<void> {
-		await this.redisClient.set(key, value, "EX", expireTime || 86400);
+	): Promise<string> {
+		return this.redisClient.set(key, value, "EX", expireTime || 86400);
 	}
 
-	public async update(key: RedisKey, value: RedisValue): Promise<void> {
-		await this.redisClient.set(key, value);
+	public remove(key: string): Promise<number> {
+		return this.redisClient.del(key);
 	}
 
-	public async remove(key: string): Promise<number> {
-		return await this.redisClient.del(key);
+	public clear(): Promise<string> {
+		return this.redisClient.flushall();
 	}
 
-	public async getTimeToLive(key: RedisKey) {
-		return await this.redisClient.ttl(key);
+	public getTimeToLive(key: RedisKey): Promise<number> {
+		return this.redisClient.ttl(key);
 	}
 }

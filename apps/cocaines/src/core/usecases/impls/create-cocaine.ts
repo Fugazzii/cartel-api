@@ -7,12 +7,11 @@ import { Cocaine } from "../../domain";
 
 @Injectable()
 export class CreateCocaineUseCase implements IUseCase<CreateCocaineDto, void> {
+    public constructor(
+        @Inject(REPOSITORY_TOKEN) private readonly cocaineRepo: IRepository
+    ) {}
 
-	public constructor(
-		@Inject(REPOSITORY_TOKEN) private readonly cocaineRepo: IRepository
-	) { }
-
-	public execute(newCocaine: CreateCocaineDto): Promise<Cocaine> {
-		return this.cocaineRepo.create(newCocaine);
-	}
+    public execute(newCocaine: CreateCocaineDto): Promise<Cocaine> {
+        return this.cocaineRepo.create(newCocaine);
+    }
 }

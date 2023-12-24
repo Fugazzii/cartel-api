@@ -4,11 +4,11 @@ import { CreateCocaineDto } from "../../core/usecases/dtos/create-cocaine.dto";
 
 @Injectable()
 export class CocainesService {
-	public constructor(
-		@Inject() private readonly createCocaineUseCase: CreateCocaineUseCase
-	) { }
+    public constructor(
+        @Inject() private readonly createCocaineUseCase: CreateCocaineUseCase
+    ) {}
 
-	public create(createCocaineDto: CreateCocaineDto) {
-		return this.createCocaineUseCase.execute(createCocaineDto);
-	}
+    public create(createCocaineDto: CreateCocaineDto) {
+        return this.createCocaineUseCase.execute(createCocaineDto);
+    }
 }

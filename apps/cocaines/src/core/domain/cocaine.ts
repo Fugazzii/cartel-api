@@ -1,43 +1,45 @@
 import { MAX_WEIGHT, MIN_WEIGHT } from "./constants";
-import { OverweightProductException, UnderWeightProductException } from "./errors";
+import {
+    OverweightProductException,
+    UnderWeightProductException
+} from "./errors";
 
 export class Cocaine {
-	private id: number;
-	private weight: number;
-	private price_per_kg: number;
-	private origin: string;
+    private _id: number;
+    private _weight: number;
+    private _price_per_kg: number;
+    private _origin: string;
 
-	public set setWeight(w: number) {
-		if (w > MAX_WEIGHT) {
-			throw new OverweightProductException();
-		}
+    public set setWeight(w: number) {
+        if (w > MAX_WEIGHT) {
+            throw new OverweightProductException();
+        }
 
-		if (w < MIN_WEIGHT) {
-			throw new UnderWeightProductException();
-		}
+        if (w < MIN_WEIGHT) {
+            throw new UnderWeightProductException();
+        }
 
-		this.weight = w;
-	}
+        this._weight = w;
+    }
 
-	public set pricePerKg(price: number) {
-		this.pricePerKg = price;
-	}
+    public get pricePerKg() {
+        return this._price_per_kg;
+    }
+    public set pricePerKg(price: number) {
+        this._price_per_kg = price;
+    }
 
-	public set setOrigin(origin: string) {
-		this.origin = origin;
-	}
+    public get origin() {
+        return this._origin;
+    }
+    public set setOrigin(origin: string) {
+        this._origin = origin;
+    }
 
-	public get idValue() {
-		return this.id;
-	}
-	public get kgs() {
-		return this.weight;
-	}
-	public get pricePerKg() {
-		return this.price_per_kg;
-	}
-	public get originValue() {
-		return this.origin;
-	}
-
+    public get id() {
+        return this._id;
+    }
+    public get weight() {
+        return this._weight;
+    }
 }

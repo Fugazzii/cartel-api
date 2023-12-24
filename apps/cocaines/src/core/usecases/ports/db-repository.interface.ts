@@ -1,5 +1,5 @@
 import { Cocaine } from "../../domain/cocaine";
 
 export interface IRepository {
-	create<T>(newRecord: T): Promise<Cocaine>;
+    create<T>(newRecord: T): Promise<Cocaine>;
 }

@@ -7,7 +7,7 @@ import { ICacheRepository } from "../../core/usecases";
 export class CacheAdapter implements ICacheRepository {
 
 	public constructor(
-		@Inject(REDIS_TOKEN) private readonly redisService: RedisService
+		@Inject(REDIS_TOKEN) private readonly redisService: any
 	) { }
 
 	public save<T extends RedisValue>(key: string, value: T): Promise<string>;

@@ -14,9 +14,21 @@ case "$1" in
     echo "Running Docker container..."
     sudo docker run -p 3000:3000 -d --name cartel-api_cocaines_ms cartel-api_cocaines_ms
     ;;
+  "logs")
+    echo "Retrieving Docker container logs..."
+    sudo docker logs cartel-api_cocaines_ms
+    ;;
+  "watch")
+    echo "Running Docker container in a watch mode..."
+    sudo docker run -p 3000:3000 --name cartel-api_cocaines_ms cartel-api_cocaines_ms    
+    ;;
   "stop")
     echo "Stopping Docker container..."
     sudo docker stop cartel-api_cocaines_ms
+    ;;
+  "up")
+    echo "Rebuilding and running Docker container..."
+    ./cocaines.sh kill && ./cocaines.sh build && ./cocaines.sh run && sleep 3 && ./cocaines.sh logs
     ;;
   "kill")
     echo "Killing Docker container..."

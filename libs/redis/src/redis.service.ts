@@ -4,7 +4,6 @@ import Redis from "ioredis";
 export type RedisKey = string | Buffer;
 export type RedisValue = string | number | Buffer;
 
-@Injectable()
 export class RedisService {
 	private redisClient: Redis;
 

@@ -18,6 +18,6 @@ export const dbConfig: KnexModuleOptions = Object.freeze({
 });
 
 export const cacheConfig = Object.freeze({
-	host: process.env.CACHE_HOST,
-	port: Number(process.env.CACHE_PORT)
+	host: process.env.REDIS_HOST,
+	port: Number(process.env.REDIS_PORT)
 });

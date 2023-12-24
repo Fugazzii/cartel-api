@@ -1,10 +1,10 @@
 import { RedisKey, RedisService, RedisValue } from "@app/redis";
 import { REDIS_TOKEN } from "@app/redis/redis.provider";
 import { Inject, Injectable } from "@nestjs/common";
-import { ICacheRepository } from "../../core/usecases";
+import { ICacheRepository } from "../../../core/usecases";
 
 @Injectable()
-export class CacheAdapter implements ICacheRepository {
+export class RedisAdapter implements ICacheRepository {
 
 	public constructor(
 		@Inject(REDIS_TOKEN) private readonly redisService: any

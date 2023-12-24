@@ -1,6 +1,6 @@
-import { RedisModule, RedisService } from "@app/redis";
+import { RedisModule } from "@app/redis";
 import { DynamicModule, Module } from "@nestjs/common";
-import { CacheAdapter } from "./cache.adapter";
+import { RedisAdapter } from "./redis/redis.adapter";
 import { provideRedis } from "@app/redis/redis.provider";
 
 export type CacheOptions = {
@@ -19,10 +19,10 @@ export class CacheModule {
 			],
 			providers: [
 				provideRedis(host, port),
-				CacheAdapter
+				RedisAdapter
 			],
 			exports: [
-				CacheAdapter
+				RedisAdapter
 			]
 		};
 	}

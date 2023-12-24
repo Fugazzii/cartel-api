@@ -8,7 +8,7 @@ import {
     Post
 } from "@nestjs/common";
 import { CocainesService } from "../services/cocaines.service";
-import { CreateCocaineDto } from "../../core/usecases/dtos/create-cocaine.dto";
+import { ProduceCocaineDto } from "../../core/usecases/dtos/produce-cocaine.dto";
 import { CocainesPresentation } from "../../presentation/cocaines.presentation";
 import { ApiResponse } from "../../presentation/api-response";
 import { Cocaine } from "../../core/domain";
@@ -23,11 +23,11 @@ export class CocainesController {
     @HttpCode(HttpStatus.CREATED)
     @Post("/cocaine")
     public async create(
-        @Body() createCocaineDto: CreateCocaineDto
+        @Body() produceCocaineDto: ProduceCocaineDto
     ): Promise<ApiResponse<Cocaine, unknown>> {
         try {
             const cocaine = await this.cocaineService.produceCocaine(
-                createCocaineDto
+                produceCocaineDto
             );
 
             return this.presentator.send(cocaine, "Created a pack of cocaine");

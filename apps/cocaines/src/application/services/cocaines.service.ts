@@ -1,27 +1,46 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { CreateCocaineUseCase } from "../../core/usecases/impls/create-cocaine";
-import { CreateCocaineDto } from "../../core/usecases/dtos/create-cocaine.dto";
-import { FindAllCocaineUseCase } from "../../core/usecases/impls/find-all-cocaine";
-import { FindOneCocaineUseCase } from "../../core/usecases/impls/find-one-cocaine";
+import { ProduceCocaineDto } from "../../core/usecases/dtos/produce-cocaine.dto";
 import { Cocaine } from "../../core/domain";
+import { REPOSITORY_TOKEN } from "../../infrastructure";
+import {
+    ProduceCocaineUseCase,
+    TraverseWarehouseUseCase,
+    GetOneCocaineUseCase,
+    IRepository,
+    UseCaseFactory
+} from "../../core/usecases";
+import { UseCase } from "../../core/usecases/use-case.token";
 
 @Injectable()
 export class CocainesService {
-    public constructor(
-        @Inject() private readonly createCocaineUseCase: CreateCocaineUseCase,
-        @Inject() private readonly findAllCocaineUseCase: FindAllCocaineUseCase,
-        @Inject() private readonly findOneCocaineUseCase: FindOneCocaineUseCase
-    ) {}
+    private readonly produceCocaineUseCase: ProduceCocaineUseCase;
+    private readonly traverseWareHouseUseCase: TraverseWarehouseUseCase;
+    private readonly getOneProductUseCase: GetOneCocaineUseCase;
 
-    public produceCocaine(createCocaineDto: CreateCocaineDto) {
-        return this.createCocaineUseCase.execute(createCocaineDto);
+    public constructor(@Inject(REPOSITORY_TOKEN) cocaineRepo: IRepository) {
+        this.produceCocaineUseCase = UseCaseFactory.create(
+            UseCase.ProduceCocaine,
+            cocaineRepo
+        );
+        this.traverseWareHouseUseCase = UseCaseFactory.create(
+            UseCase.TraverseWarehouse,
+            cocaineRepo
+        );
+        this.getOneProductUseCase = UseCaseFactory.create(
+            UseCase.GetOneProduct,
+            cocaineRepo
+        );
+    }
+
+    public produceCocaine(produceCocaineDto: ProduceCocaineDto) {
+        return this.produceCocaineUseCase.execute(produceCocaineDto);
     }
 
     public traverseWholeWarehouse(): Promise<Array<Cocaine>> {
-        return this.findAllCocaineUseCase.execute();
+        return this.traverseWareHouseUseCase.execute();
     }
 
     public getOneProductById(id: number): Promise<Cocaine> {
-        return this.findOneCocaineUseCase.execute(id);
+        return this.getOneProductUseCase.execute(id);
     }
 }

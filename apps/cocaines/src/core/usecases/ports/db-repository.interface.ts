@@ -1,8 +1,8 @@
 import { Cocaine } from "../../domain/cocaine";
-import { CreateCocaineDto } from "../dtos/create-cocaine.dto";
+import { ProduceCocaineDto } from "../dtos/produce-cocaine.dto";
 
 export interface IRepository {
-    create(createCocaineDto: CreateCocaineDto): Promise<Cocaine>;
+    create(produceCocaineDto: ProduceCocaineDto): Promise<Cocaine>;
     findAll(): Promise<Array<Cocaine>>;
     findOne(id: number): Promise<Cocaine>;
 }

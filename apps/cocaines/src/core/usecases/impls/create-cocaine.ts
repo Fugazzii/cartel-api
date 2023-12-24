@@ -6,7 +6,9 @@ import { IRepository } from "../ports/db-repository.interface";
 import { Cocaine } from "../../domain";
 
 @Injectable()
-export class CreateCocaineUseCase implements IUseCase<CreateCocaineDto, void> {
+export class CreateCocaineUseCase
+    implements IUseCase<CreateCocaineDto, Cocaine>
+{
     public constructor(
         @Inject(REPOSITORY_TOKEN) private readonly cocaineRepo: IRepository
     ) {}

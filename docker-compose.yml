@@ -2,36 +2,6 @@ version: '3'
 
 services:
 
-  cocaines:
-    build:
-      context: ./
-      dockerfile: ./apps/cocaines/Dockerfile
-    ports:
-      - 3000:3000
-    depends_on:
-      - postgres_cocaines
-      - postgres_members
-      - nats
-      - redis
-    volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
-
-  members:
-    build:
-      context: ./
-      dockerfile: ./apps/members/Dockerfile
-    ports:
-      - 3001:3001
-    depends_on:
-      - postgres_cocaines
-      - postgres_members
-      - nats
-      - redis
-    volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
-
   postgres_cocaines:
     image: postgres:14.1-alpine
     ports:

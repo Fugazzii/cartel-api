@@ -1,8 +1,14 @@
-import { Module } from '@nestjs/common';
+import { DynamicModule, Module } from "@nestjs/common";
+import { InfrastructureModule, InfrastructureModuleAsyncOptions } from '../infrastructure/infrastructure.module';
 
-@Module({
-  imports: [],
-  controllers: [],
-  providers: [],
-})
-export class CocainesModule { }
+@Module({})
+export class CocainesModule {
+  public static forRootAsync(options: InfrastructureModuleAsyncOptions): DynamicModule {
+    return {
+      module: CocainesModule,
+      imports: [
+        InfrastructureModule.forRootAsync(options),
+      ],
+    };
+  }
+}

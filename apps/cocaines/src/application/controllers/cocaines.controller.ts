@@ -1,4 +1,12 @@
-import { Body, Controller, HttpCode, HttpStatus } from "@nestjs/common";
+import {
+    Body,
+    Controller,
+    Get,
+    HttpCode,
+    HttpStatus,
+    Param,
+    Post
+} from "@nestjs/common";
 import { CocainesService } from "../services/cocaines.service";
 import { CreateCocaineDto } from "../../core/usecases/dtos/create-cocaine.dto";
 import { CocainesPresentation } from "../../presentation/cocaines.presentation";
@@ -13,11 +21,14 @@ export class CocainesController {
     ) {}
 
     @HttpCode(HttpStatus.CREATED)
+    @Post("/cocaine")
     public async create(
         @Body() createCocaineDto: CreateCocaineDto
     ): Promise<ApiResponse<Cocaine, unknown>> {
         try {
-            const cocaine = await this.cocaineService.create(createCocaineDto);
+            const cocaine = await this.cocaineService.produceCocaine(
+                createCocaineDto
+            );
 
             return this.presentator.send(cocaine, "Created a pack of cocaine");
         } catch (error) {
@@ -25,6 +36,36 @@ export class CocainesController {
                 error,
                 "Failed to create cocaine"
             );
+        }
+    }
+
+    @HttpCode(HttpStatus.OK)
+    @Get("/cocaines")
+    public async findAll() {
+        try {
+            const cocaine = await this.cocaineService.traverseWholeWarehouse();
+
+            return this.presentator.send(
+                cocaine,
+                "Retrieved all information about cocaines from the warehouse."
+            );
+        } catch (error) {
+            return this.presentator.sendError(
+                error,
+                "Failed to traverse the warehouse."
+            );
+        }
+    }
+
+    @HttpCode(HttpStatus.OK)
+    @Get("/cocaine/:id")
+    public async findOne(@Param("id") id: number) {
+        try {
+            const cocaine = await this.cocaineService.getOneProductById(id);
+
+            return this.presentator.send(cocaine, "Returned product");
+        } catch (error) {
+            return this.presentator.sendError(error, "Failed to get produdct");
         }
     }
 }

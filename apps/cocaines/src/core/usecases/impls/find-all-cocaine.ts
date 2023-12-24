@@ -4,11 +4,11 @@ import { IUseCase } from "../use-case.interface";
 import { IRepository } from "../ports/db-repository.interface";
 
 export class FindAllCocaineUseCase
-	implements IUseCase<undefined, Array<Cocaine>>
+    implements IUseCase<undefined, Array<Cocaine>>
 {
-	public constructor(@Inject() private readonly cocaineRepo: IRepository) { }
+    public constructor(@Inject() private readonly cocaineRepo: IRepository) {}
 
-	public execute(): Promise<Array<Cocaine>> {
-		return this.cocaineRepo.findAll();
-	}
+    public execute(): Promise<Array<Cocaine>> {
+        return this.cocaineRepo.findAll();
+    }
 }

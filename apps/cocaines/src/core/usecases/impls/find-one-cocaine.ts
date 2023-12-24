@@ -4,9 +4,9 @@ import { IUseCase } from "../use-case.interface";
 import { IRepository } from "../ports/db-repository.interface";
 
 export class FindOneCocaineUseCase implements IUseCase<undefined, Cocaine> {
-	public constructor(@Inject() private readonly cocaineRepo: IRepository) { }
+    public constructor(@Inject() private readonly cocaineRepo: IRepository) {}
 
-	public execute(id: number): Promise<Cocaine> {
-		return this.cocaineRepo.findOne(id);
-	}
+    public execute(id: number): Promise<Cocaine> {
+        return this.cocaineRepo.findOne(id);
+    }
 }

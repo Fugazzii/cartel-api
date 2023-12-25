@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ $# -ne 1 ]; then
-  echo "Usage: $0 <build|run|stop|kill>"
+  echo "Usage: $0 <build|run|stop|kill|watch|logs|up>"
   exit 1
 fi
 
@@ -12,7 +12,7 @@ case "$1" in
     ;;
   "run")
     echo "Running Docker container..."
-    sudo docker run -p 3000:3000 -d --name cartel-api_cocaines_ms cartel-api_cocaines_ms
+    sudo docker run --network=cartel-api_cartel-network -p 3000:3000 -d --name cartel-api_cocaines_ms cartel-api_cocaines_ms
     ;;
   "logs")
     echo "Retrieving Docker container logs..."
@@ -20,7 +20,7 @@ case "$1" in
     ;;
   "watch")
     echo "Running Docker container in a watch mode..."
-    sudo docker run -p 3000:3000 --name cartel-api_cocaines_ms cartel-api_cocaines_ms    
+    sudo docker run --network=cartel-api_cartel-network -p 3000:3000 --name cartel-api_cocaines_ms cartel-api_cocaines_ms    
     ;;
   "stop")
     echo "Stopping Docker container..."

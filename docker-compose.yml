@@ -1,7 +1,6 @@
 version: '3'
 
 services:
-
   postgres_cocaines:
     image: postgres:14.1-alpine
     ports:
@@ -12,6 +11,8 @@ services:
       POSTGRES_DB: root
     volumes:
       - postgres_cocaines:/var/lib/postgresql/data
+    networks:
+      - cartel-network
 
   postgres_members:
     image: postgres:14.1-alpine
@@ -23,6 +24,8 @@ services:
       POSTGRES_DB: root
     volumes:
       - postgres_members:/var/lib/postgresql/data
+    networks:
+      - cartel-network
 
   redis:
     image: redis
@@ -30,14 +33,22 @@ services:
       - 6379:6379
     volumes:
       - redis:/data
+    networks:
+      - cartel-network
 
   nats:
     image: nats:latest
     ports:
       - 4222:4222
       - 8222:8222
+    networks:
+      - cartel-network
 
 volumes:
   postgres_members:
   postgres_cocaines:
   redis:
+
+networks:
+  cartel-network:
+    driver: bridge

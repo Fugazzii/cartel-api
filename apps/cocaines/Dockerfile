@@ -7,7 +7,7 @@ RUN npm install
 
 COPY . .
 
-RUN npm install -g knex
+# RUN npm install -g knex
 
 # WORKDIR /usr/src/app/apps/cocaines/src/infrastructure/db/postgres/knex
 # RUN npx knex migrate:make migration

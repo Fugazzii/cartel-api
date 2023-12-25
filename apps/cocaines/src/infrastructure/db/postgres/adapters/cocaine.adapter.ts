@@ -17,8 +17,7 @@ export class CocaineRepository implements IRepository {
         return this.knex
             .table<Cocaine>(this.tableName)
             .insert<Cocaine>(newRecord)
-            .returning<Cocaine>("*")
-            .first<Cocaine>();
+            .returning<Cocaine>("*");
     }
 
     public findAll(): Promise<Array<Cocaine>> {

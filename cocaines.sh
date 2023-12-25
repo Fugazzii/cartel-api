@@ -10,6 +10,10 @@ case "$1" in
     echo "Building Docker image..."
     sudo docker build -t cartel-api_cocaines_ms -f ./apps/cocaines/Dockerfile .
     ;;
+  "rebuild")
+    echo "Building Docker image..."
+    sudo docker build --no-cache -t cartel-api_cocaines_ms -f ./apps/cocaines/Dockerfile .
+  ;;
   "run")
     echo "Running Docker container..."
     sudo docker run --network=cartel-api_cartel-network -p 3000:3000 -d --name cartel-api_cocaines_ms cartel-api_cocaines_ms
@@ -28,7 +32,7 @@ case "$1" in
     ;;
   "up")
     echo "Rebuilding and running Docker container..."
-    ./cocaines.sh kill && ./cocaines.sh build && ./cocaines.sh run && sleep 3 && ./cocaines.sh logs
+    ./cocaines.sh kill && ./cocaines.sh rebuild && ./cocaines.sh run && sleep 3 && ./cocaines.sh logs
     ;;
   "kill")
     echo "Killing Docker container..."

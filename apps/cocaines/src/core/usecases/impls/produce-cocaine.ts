@@ -6,9 +6,10 @@ import type { Cocaine } from "../../domain";
 export class ProduceCocaineUseCase
     implements IUseCase<ProduceCocaineDto, Cocaine>
 {
-    public constructor(private readonly cocaineRepo: IRepository) {}
+    public constructor(private readonly cocaineRepo: IRepository) { }
 
     public execute(newCocaine: ProduceCocaineDto): Promise<Cocaine> {
+        console.log("usecase");
         return this.cocaineRepo.create(newCocaine);
     }
 }

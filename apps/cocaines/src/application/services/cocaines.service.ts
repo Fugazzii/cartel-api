@@ -35,6 +35,7 @@ export class CocainesService {
     public produceCocaine(
         produceCocaineDto: ProduceCocaineDto
     ): Promise<Cocaine> {
+        console.log(`Creating cocaine ${produceCocaineDto}`);
         return this.produceCocaineUseCase.execute(produceCocaineDto);
     }
 

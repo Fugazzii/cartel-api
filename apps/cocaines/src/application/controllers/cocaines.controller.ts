@@ -31,8 +31,11 @@ export class CocainesController {
                 produceCocaineDto
             );
 
+            console.log("COcaine", cocaine);
+
             return this.presentator.send(cocaine, "Created a pack of cocaine");
         } catch (error) {
+            console.log(error);
             return this.presentator.sendError(
                 error,
                 "Failed to create cocaine"

@@ -67,8 +67,8 @@ export class CocainesController {
         @Param("id") id: number
     ): Promise<ApiResponse<Cocaine>> {
         try {
+            console.log("Reached controller");
             const cocaine = await this.cocaineService.getOneProductById(id);
-
             return this.presentator.send(cocaine, "Returned product");
         } catch (error) {
             return this.presentator.sendError(error, "Failed to get produdct");

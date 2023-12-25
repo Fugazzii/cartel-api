@@ -4,6 +4,7 @@ import { DatabaseModule } from "./db/db.module";
 import type { CacheOptions } from "./cache/cache.module";
 import { CacheModule } from "./cache/cache.module";
 import type { KnexModuleOptions } from "nestjs-knex";
+import { CocaineRepositoryProvider } from "./db";
 
 export type InfrastructureOptions = {
     cacheConfig: CacheOptions;
@@ -21,7 +22,9 @@ export class InfrastructureModule {
             imports: [
                 DatabaseModule.forRoot(dbConfig),
                 CacheModule.forRoot(cacheConfig)
-            ]
+            ],
+            providers: [CocaineRepositoryProvider],
+            exports: [CocaineRepositoryProvider]
         };
     }
 }

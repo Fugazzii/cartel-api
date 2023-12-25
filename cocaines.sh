@@ -32,7 +32,7 @@ case "$1" in
     ;;
   "up")
     echo "Rebuilding and running Docker container..."
-    ./cocaines.sh kill && ./cocaines.sh rebuild && ./cocaines.sh run && sleep 3 && ./cocaines.sh logs
+    ./cocaines.sh kill && ./cocaines.sh build && ./cocaines.sh run && sleep 3 && ./cocaines.sh logs
     ;;
   "kill")
     echo "Killing Docker container..."

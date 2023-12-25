@@ -5,13 +5,16 @@ import { CocainesService } from "./services/cocaines.service";
 
 import {
     InfrastructureModule,
-    CocaineRepositoryProvider
+    CocaineRepositoryProvider,
+    RedisRepository,
+    RedisProvider
 } from "@cocaines/infrastructure";
 
 import {
     PresentationModule,
     CocainesPresentation
 } from "@cocaines/presentation";
+import { CacheProxy } from "./services/cache-proxy.service";
 
 @Module({
     imports: [
@@ -27,7 +30,9 @@ import {
     providers: [
         CocainesService,
         CocaineRepositoryProvider,
-        CocainesPresentation
+        CocainesPresentation,
+        CacheProxy,
+        RedisProvider.provide(process.env.REDIS_HOST, +process.env.REDIS_PORT)
     ]
 })
 export class CocainesModule { }

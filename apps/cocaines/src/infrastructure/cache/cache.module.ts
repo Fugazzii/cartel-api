@@ -1,7 +1,6 @@
 import type { DynamicModule } from "@nestjs/common";
 import { Module } from "@nestjs/common";
-import { RedisAdapter } from "./redis/redis.adapter";
-import { RedisModule, RedisProvider } from "@app/redis";
+import { RedisProvider } from "./redis/redis.provider";
 
 export type CacheOptions = {
     host: string;
@@ -11,11 +10,13 @@ export type CacheOptions = {
 @Module({})
 export class CacheModule {
     public static forRoot({ host, port }: CacheOptions): DynamicModule {
+
+        const redisProvider = RedisProvider.provide(host, port);
+
         return {
             module: CacheModule,
-            imports: [RedisModule.forRoot(host, port)],
-            providers: [RedisAdapter, RedisProvider.provide(host, port)],
-            exports: [RedisAdapter]
+            providers: [redisProvider],
+            exports: [redisProvider]
         };
     }
 }

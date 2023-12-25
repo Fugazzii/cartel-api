@@ -4,20 +4,22 @@ import type { ProduceCocaineDto } from "@cocaines/usecases";
 import type { Cocaine } from "@cocaines/domain";
 import type {
     ProduceCocaineUseCase,
-    TraverseWarehouseUseCase,
-    GetOneCocaineUseCase
+    TraverseWarehouseUseCase
 } from "@cocaines/usecases";
 
 import { UseCase, IRepository, UseCaseFactory } from "@cocaines/usecases";
-import { REPOSITORY_TOKEN } from "@cocaines/infrastructure";
+import { CacheProxy } from "./cache-proxy.service";
+import { REPOSITORY_TOKEN } from "@cocaines/common";
 
 @Injectable()
 export class CocainesService {
     private readonly produceCocaineUseCase: ProduceCocaineUseCase;
     private readonly traverseWareHouseUseCase: TraverseWarehouseUseCase;
-    private readonly getOneProductUseCase: GetOneCocaineUseCase;
 
-    public constructor(@Inject(REPOSITORY_TOKEN) cocaineRepo: IRepository) {
+    public constructor(
+        @Inject(REPOSITORY_TOKEN) cocaineRepo: IRepository,
+        private readonly cacheProxy: CacheProxy
+    ) {
         this.produceCocaineUseCase = UseCaseFactory.create(
             UseCase.ProduceCocaine,
             cocaineRepo
@@ -26,16 +28,9 @@ export class CocainesService {
             UseCase.TraverseWarehouse,
             cocaineRepo
         );
-        this.getOneProductUseCase = UseCaseFactory.create(
-            UseCase.GetOneProduct,
-            cocaineRepo
-        );
     }
 
-    public produceCocaine(
-        produceCocaineDto: ProduceCocaineDto
-    ): Promise<Cocaine> {
-        console.log(`Creating cocaine ${produceCocaineDto}`);
+    public produceCocaine(produceCocaineDto: ProduceCocaineDto): Promise<Cocaine> {
         return this.produceCocaineUseCase.execute(produceCocaineDto);
     }
 
@@ -44,6 +39,7 @@ export class CocainesService {
     }
 
     public getOneProductById(id: number): Promise<Cocaine> {
-        return this.getOneProductUseCase.execute(id);
+        console.log("Executing cache proxy");
+        return this.cacheProxy.getAndCache(id);
     }
 }

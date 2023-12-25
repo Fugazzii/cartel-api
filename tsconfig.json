@@ -46,6 +46,9 @@
       ],
       "@cocaines/infrastructure": [
         "apps/cocaines/src/infrastructure"
+      ],
+      "@cocaines/common": [
+        "apps/cocaines/src/common"
       ]
     }
   }

@@ -1,42 +1,43 @@
-import type { RedisKey, RedisValue } from "@app/redis";
-import { REDIS_TOKEN, RedisService } from "@app/redis";
+import { ICacheRepository } from "@cocaines/usecases";
+import { Injectable } from "@nestjs/common";
+import Redis from "ioredis";
 
-import { Inject, Injectable } from "@nestjs/common";
-import type { ICacheRepository } from "@cocaines/usecases";
+export type RedisKey = string | Buffer;
+export type RedisValue = string | number | Buffer;
 
 @Injectable()
-export class RedisAdapter implements ICacheRepository {
-    public constructor(
-        @Inject(REDIS_TOKEN) private readonly redisService: RedisService
-    ) {}
+export class RedisRepository implements ICacheRepository {
+    private readonly redisClient: Redis;
 
-    public save<T extends RedisValue>(key: string, value: T): Promise<string>;
-    public save<T extends RedisValue>(
-        key: string,
-        value: T,
-        expireTime: number
-    ): Promise<string>;
-    public save<T extends RedisValue>(
-        key: string,
-        value: T,
-        expireTime?: number
-    ): Promise<string> {
-        return this.redisService.set(key, value, expireTime ?? 86400);
+    public constructor(host: string, port: number) {
+        this.redisClient = new Redis({ host, port });
+
+        this.redisClient.once("connecting", () => console.log("⌚ Connecting to Redis...", host, port));
+        this.redisClient.once("connect", () => console.log("🚀 Successfully Connected to Redis!"));
+        this.redisClient.once("error", (err) => console.log("❌ Failed to connect to Redis.", err));
     }
 
-    public retrieve(key: string): Promise<string | null> {
-        return this.redisService.get(key);
+    public retrieve(key: RedisKey): Promise<string | null> {
+        return this.redisClient.get(key);
+    }
+
+    public save(
+        key: RedisKey,
+        value: RedisValue,
+        expireTime?: number
+    ): Promise<string> {
+        return this.redisClient.set(key, value, "EX", expireTime ?? 86400);
     }
 
     public remove(key: string): Promise<number> {
-        return this.redisService.remove(key);
+        return this.redisClient.del(key);
     }
 
     public clear(): Promise<string> {
-        return this.redisService.clear();
+        return this.redisClient.flushall();
     }
 
     public getTimeToLive(key: RedisKey): Promise<number> {
-        return this.redisService.getTimeToLive(key);
+        return this.redisClient.ttl(key);
     }
 }

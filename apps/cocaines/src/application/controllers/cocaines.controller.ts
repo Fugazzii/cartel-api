@@ -5,13 +5,15 @@ import {
     HttpCode,
     HttpStatus,
     Param,
-    Post
+    Post,
+    UsePipes
 } from "@nestjs/common";
 import { CocainesService } from "../services/cocaines.service";
 import type { Cocaine } from "@cocaines/domain";
 import { ProduceCocaineDto } from "@cocaines/usecases";
 import type { ApiResponse } from "@cocaines/presentation";
 import { CocainesPresentation } from "@cocaines/presentation";
+import { ProduceCocaineSchema, ProduceCocaineValidationPipe } from "../validation";
 
 @Controller("/")
 export class CocainesController {
@@ -23,6 +25,7 @@ export class CocainesController {
 
     @HttpCode(HttpStatus.CREATED)
     @Post("/cocaine")
+    @UsePipes(new ProduceCocaineValidationPipe(ProduceCocaineSchema))
     public async create(
         @Body() produceCocaineDto: ProduceCocaineDto
     ): Promise<ApiResponse<Cocaine, unknown>> {

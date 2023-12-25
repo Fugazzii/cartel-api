@@ -1,18 +1,19 @@
 import { Injectable } from "@nestjs/common";
-import type { Cocaine } from "../../../../core/domain";
-import type { IRepository } from "../../../../core/usecases";
+import type { Cocaine } from "@cocaines/domain";
+import type { IRepository, ProduceCocaineDto } from "@cocaines/usecases";
 import { Knex } from "knex";
 import { InjectKnex } from "nestjs-knex";
 
 @Injectable()
 export class CocaineRepository implements IRepository {
+
     private readonly tableName: string;
 
     public constructor(@InjectKnex() private readonly knex: Knex) {
         this.tableName = "cocaines";
     }
 
-    public create<T>(newRecord: T): Promise<Cocaine> {
+    public create(newRecord: ProduceCocaineDto): Promise<Cocaine> {
         return this.knex
             .table<Cocaine>(this.tableName)
             .insert<Cocaine>(newRecord)
@@ -21,7 +22,9 @@ export class CocaineRepository implements IRepository {
     }
 
     public findAll(): Promise<Array<Cocaine>> {
-        return this.knex.select("*").from<Cocaine>(this.tableName);
+        return this.knex
+            .select("*")
+            .from<Cocaine>(this.tableName);
     }
 
     public findOne(id: number): Promise<Cocaine> {

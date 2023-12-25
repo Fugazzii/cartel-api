@@ -5,7 +5,7 @@ configDotenv({
     path: "/usr/src/app/apps/cocaines/.env.dev"
 });
 
-const config: knex.Knex.Config<unknown> = {
+const config: knex.Knex.Config = {
     client: "postgresql",
     connection: {
         host: process.env.POSTGRES_HOST,

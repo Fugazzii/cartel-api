@@ -15,10 +15,11 @@ import { CocainesPresentation } from "@cocaines/presentation";
 
 @Controller("/")
 export class CocainesController {
+
     public constructor(
         private readonly presentator: CocainesPresentation,
         private readonly cocaineService: CocainesService
-    ) {}
+    ) { }
 
     @HttpCode(HttpStatus.CREATED)
     @Post("/cocaine")

@@ -1,9 +1,9 @@
 import { Injectable } from "@nestjs/common";
-import type { ErrorResponse, SuccessResponse } from "./api-response";
+import { SuccessResponse, ErrorResponse } from "../types/api-response";
 
 @Injectable()
 export class CocainesPresentation {
-    public send<S>(data: S, message?: string): SuccessResponse<S> {
+    public send<S>(data: S, message: string): SuccessResponse<S> {
         return {
             success: true,
             message,
@@ -11,7 +11,7 @@ export class CocainesPresentation {
         };
     }
 
-    public sendError<E>(error: E, message?: string): ErrorResponse<E> {
+    public sendError<E>(error: E, message: string): ErrorResponse<E> {
         return {
             success: false,
             message,

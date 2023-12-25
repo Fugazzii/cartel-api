@@ -21,9 +21,7 @@ export class InfrastructureModule {
             imports: [
                 DatabaseModule.forRoot(dbConfig),
                 CacheModule.forRoot(cacheConfig)
-            ],
-            providers: [],
-            exports: []
+            ]
         };
     }
 }

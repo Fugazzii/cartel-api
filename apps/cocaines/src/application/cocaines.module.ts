@@ -19,13 +19,15 @@ import {
             cacheConfig,
             dbConfig
         }),
-        PresentationModule
+        PresentationModule.forRoot()
     ],
-    controllers: [CocainesController],
+    controllers: [
+        CocainesController
+    ],
     providers: [
         CocainesService,
         CocaineRepositoryProvider,
         CocainesPresentation
     ]
 })
-export class CocainesModule {}
+export class CocainesModule { }

@@ -1,7 +1,8 @@
-import { RedisKey, RedisService, RedisValue } from "@app/redis";
-import { REDIS_TOKEN } from "@app/redis/redis.provider";
+import type { RedisKey, RedisValue } from "@app/redis";
+import { REDIS_TOKEN, RedisService } from "@app/redis";
+
 import { Inject, Injectable } from "@nestjs/common";
-import { ICacheRepository } from "../../../core/usecases";
+import type { ICacheRepository } from "@cocaines/usecases";
 
 @Injectable()
 export class RedisAdapter implements ICacheRepository {
@@ -20,10 +21,10 @@ export class RedisAdapter implements ICacheRepository {
         value: T,
         expireTime?: number
     ): Promise<string> {
-        return this.redisService.set(key, value, expireTime || 86400);
+        return this.redisService.set(key, value, expireTime ?? 86400);
     }
 
-    public retrieve(key: string): Promise<string> {
+    public retrieve(key: string): Promise<string | null> {
         return this.redisService.get(key);
     }
 
@@ -35,7 +36,7 @@ export class RedisAdapter implements ICacheRepository {
         return this.redisService.clear();
     }
 
-    public getTimeToLive(key: RedisKey) {
+    public getTimeToLive(key: RedisKey): Promise<number> {
         return this.redisService.getTimeToLive(key);
     }
 }

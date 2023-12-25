@@ -4,7 +4,7 @@ export type RedisKey = string | Buffer;
 export type RedisValue = string | number | Buffer;
 
 export class RedisService {
-    private redisClient: Redis;
+    private readonly redisClient: Redis;
 
     public constructor(host: string, port: number) {
         this.redisClient = new Redis({ host, port });
@@ -19,7 +19,7 @@ export class RedisService {
         value: RedisValue,
         expireTime?: number
     ): Promise<string> {
-        return this.redisClient.set(key, value, "EX", expireTime || 86400);
+        return this.redisClient.set(key, value, "EX", expireTime ?? 86400);
     }
 
     public remove(key: string): Promise<number> {

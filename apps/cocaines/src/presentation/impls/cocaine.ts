@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { ErrorResponse, SuccessResponse } from "./api-response";
+import type { ErrorResponse, SuccessResponse } from "./api-response";
 
 @Injectable()
 export class CocainesPresentation {

@@ -1,15 +1,15 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { ProduceCocaineDto } from "../../core/usecases/dtos/produce-cocaine.dto";
-import { Cocaine } from "../../core/domain";
-import { REPOSITORY_TOKEN } from "../../infrastructure";
-import {
+
+import type { ProduceCocaineDto } from "@cocaines/usecases";
+import type { Cocaine } from "@cocaines/domain";
+import type {
     ProduceCocaineUseCase,
     TraverseWarehouseUseCase,
-    GetOneCocaineUseCase,
-    IRepository,
-    UseCaseFactory
-} from "../../core/usecases";
-import { UseCase } from "../../core/usecases/use-case.token";
+    GetOneCocaineUseCase
+} from "@cocaines/usecases";
+
+import { UseCase, IRepository, UseCaseFactory } from "@cocaines/usecases";
+import { REPOSITORY_TOKEN } from "@cocaines/infrastructure";
 
 @Injectable()
 export class CocainesService {
@@ -32,7 +32,9 @@ export class CocainesService {
         );
     }
 
-    public produceCocaine(produceCocaineDto: ProduceCocaineDto) {
+    public produceCocaine(
+        produceCocaineDto: ProduceCocaineDto
+    ): Promise<Cocaine> {
         return this.produceCocaineUseCase.execute(produceCocaineDto);
     }
 

@@ -10,4 +10,6 @@ export type ErrorResponse<E> = {
     error: E;
 };
 
-export type ApiResponse<S, E> = SuccessResponse<S> | ErrorResponse<E>;
+export type ApiResponse<S = unknown, E = unknown> =
+    | SuccessResponse<S>
+    | ErrorResponse<E>;

@@ -1,5 +1,6 @@
 import { RedisModule } from "@app/redis";
-import { DynamicModule, Module } from "@nestjs/common";
+import type { DynamicModule } from "@nestjs/common";
+import { Module } from "@nestjs/common";
 import { RedisAdapter } from "./redis/redis.adapter";
 import { provideRedis } from "@app/redis/redis.provider";
 

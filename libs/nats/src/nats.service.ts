@@ -1,14 +1,11 @@
 import { Injectable } from "@nestjs/common";
-import {
-    ClientProxy,
-    ClientProxyFactory,
-    Transport
-} from "@nestjs/microservices";
-import { Observable } from "rxjs";
+import type { ClientProxy } from "@nestjs/microservices";
+import { ClientProxyFactory, Transport } from "@nestjs/microservices";
+import type { Observable } from "rxjs";
 
 @Injectable()
 export class NatsService {
-    private client: ClientProxy;
+    private readonly client: ClientProxy;
 
     public constructor(url: string) {
         this.client = ClientProxyFactory.create({

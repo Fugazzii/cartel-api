@@ -1,5 +1,5 @@
 import { configDotenv } from "dotenv";
-import { KnexModuleOptions } from "nestjs-knex";
+import type { KnexModuleOptions } from "nestjs-knex";
 
 configDotenv({
     path: "/usr/src/app/apps/cocaines/.env.dev"

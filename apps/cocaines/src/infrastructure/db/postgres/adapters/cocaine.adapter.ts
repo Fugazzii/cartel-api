@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
-import { Cocaine } from "../../../../core/domain";
-import { IRepository } from "../../../../core/usecases";
+import type { Cocaine } from "../../../../core/domain";
+import type { IRepository } from "../../../../core/usecases";
 import { Knex } from "knex";
 import { InjectKnex } from "nestjs-knex";
 

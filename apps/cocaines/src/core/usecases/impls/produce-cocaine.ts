@@ -1,7 +1,7 @@
-import { ProduceCocaineDto } from "../dtos/produce-cocaine.dto";
-import { IUseCase } from "../use-case.interface";
-import { IRepository } from "../ports/db-repository.interface";
-import { Cocaine } from "../../domain";
+import type { ProduceCocaineDto } from "../dtos/produce-cocaine.dto";
+import type { IUseCase } from "../use-case.interface";
+import type { IRepository } from "../ports/db-repository.interface";
+import type { Cocaine } from "../../domain";
 
 export class ProduceCocaineUseCase
     implements IUseCase<ProduceCocaineDto, Cocaine>

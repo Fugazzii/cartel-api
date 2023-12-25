@@ -1,5 +1,5 @@
 import { configDotenv } from "dotenv";
-import knex from "knex";
+import type knex from "knex";
 
 configDotenv({
     path: "/usr/src/app/apps/cocaines/.env.dev"

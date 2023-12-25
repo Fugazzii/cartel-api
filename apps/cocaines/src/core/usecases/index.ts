@@ -7,3 +7,6 @@ export * from "./impls/traverse-warehouse";
 export * from "./impls/get-one-product";
 
 export * from "./use-case.factory";
+
+export * from "./dtos/produce-cocaine.dto";
+export * from "./use-case.token";

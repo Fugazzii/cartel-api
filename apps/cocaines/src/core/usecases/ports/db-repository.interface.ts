@@ -1,5 +1,5 @@
-import { Cocaine } from "../../domain/cocaine";
-import { ProduceCocaineDto } from "../dtos/produce-cocaine.dto";
+import type { Cocaine } from "../../domain/cocaine";
+import type { ProduceCocaineDto } from "../dtos/produce-cocaine.dto";
 
 export interface IRepository {
     create(produceCocaineDto: ProduceCocaineDto): Promise<Cocaine>;

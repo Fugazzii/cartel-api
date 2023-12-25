@@ -1,7 +1,9 @@
-import { DynamicModule, Module } from "@nestjs/common";
+import type { DynamicModule } from "@nestjs/common";
+import { Module } from "@nestjs/common";
 import { DatabaseModule } from "./db/db.module";
-import { CacheModule, CacheOptions } from "./cache/cache.module";
-import { KnexModuleOptions } from "nestjs-knex";
+import type { CacheOptions } from "./cache/cache.module";
+import { CacheModule } from "./cache/cache.module";
+import type { KnexModuleOptions } from "nestjs-knex";
 
 export type InfrastructureOptions = {
     cacheConfig: CacheOptions;

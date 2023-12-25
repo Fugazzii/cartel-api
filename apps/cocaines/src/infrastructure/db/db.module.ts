@@ -1,6 +1,8 @@
-import { DynamicModule, Module } from "@nestjs/common";
+import type { DynamicModule } from "@nestjs/common";
+import { Module } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { KnexModule, KnexModuleOptions } from "nestjs-knex";
+import type { KnexModuleOptions } from "nestjs-knex";
+import { KnexModule } from "nestjs-knex";
 import { CocaineRepositoryProvider } from "./postgres/providers/cocaine-repository";
 
 @Module({})

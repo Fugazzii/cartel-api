@@ -8,10 +8,10 @@ import {
     Post
 } from "@nestjs/common";
 import { CocainesService } from "../services/cocaines.service";
-import { ProduceCocaineDto } from "../../core/usecases/dtos/produce-cocaine.dto";
-import { CocainesPresentation } from "../../presentation/cocaines.presentation";
-import { ApiResponse } from "../../presentation/api-response";
-import { Cocaine } from "../../core/domain";
+import type { Cocaine } from "@cocaines/domain";
+import { ProduceCocaineDto } from "@cocaines/usecases";
+import type { ApiResponse } from "@cocaines/presentation";
+import { CocainesPresentation } from "@cocaines/presentation";
 
 @Controller("/")
 export class CocainesController {
@@ -41,7 +41,7 @@ export class CocainesController {
 
     @HttpCode(HttpStatus.OK)
     @Get("/cocaines")
-    public async findAll() {
+    public async findAll(): Promise<ApiResponse<Array<Cocaine>>> {
         try {
             const cocaine = await this.cocaineService.traverseWholeWarehouse();
 
@@ -59,7 +59,9 @@ export class CocainesController {
 
     @HttpCode(HttpStatus.OK)
     @Get("/cocaine/:id")
-    public async findOne(@Param("id") id: number) {
+    public async findOne(
+        @Param("id") id: number
+    ): Promise<ApiResponse<Cocaine>> {
         try {
             const cocaine = await this.cocaineService.getOneProductById(id);
 

@@ -1,3 +1,3 @@
 export * from "./presentation.module";
-export * from "./cocaines.presentation";
-export * from "./api-response";
+export * from "./impls/cocaine";
+export * from "./types/api-response";

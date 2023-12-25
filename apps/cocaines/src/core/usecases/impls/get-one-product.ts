@@ -1,6 +1,6 @@
-import { Cocaine } from "../../domain";
-import { IUseCase } from "../use-case.interface";
-import { IRepository } from "../ports/db-repository.interface";
+import type { Cocaine } from "../../domain";
+import type { IUseCase } from "../use-case.interface";
+import type { IRepository } from "../ports/db-repository.interface";
 
 export class GetOneCocaineUseCase implements IUseCase<undefined, Cocaine> {
     public constructor(private readonly cocaineRepo: IRepository) {}

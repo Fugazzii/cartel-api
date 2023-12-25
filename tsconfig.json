@@ -12,10 +12,10 @@
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
-    "strictNullChecks": false,
-    "noImplicitAny": false,
-    "strictBindCallApply": false,
-    "forceConsistentCasingInFileNames": false,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "strictBindCallApply": true,
+    "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": false,
     "paths": {
       "@app/common": [
@@ -35,6 +35,18 @@
       ],
       "@app/redis/*": [
         "libs/redis/src/*"
+      ],
+      "@cocaines/domain": [
+        "apps/cocaines/src/core/domain"
+      ],
+      "@cocaines/usecases": [
+        "apps/cocaines/src/core/usecases"
+      ],
+      "@cocaines/presentation": [
+        "apps/cocaines/src/presentation"
+      ],
+      "@cocaines/infrastructure": [
+        "apps/cocaines/src/infrastructure"
       ]
     }
   }

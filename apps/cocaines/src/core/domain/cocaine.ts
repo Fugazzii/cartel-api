@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { MAX_WEIGHT, MIN_WEIGHT } from "./constants";
 import {
     OverweightProductException,
@@ -5,7 +6,7 @@ import {
 } from "./errors";
 
 export class Cocaine {
-    private _id: number;
+    private readonly _id: number;
     private _weight: number;
     private _price_per_kg: number;
     private _origin: string;
@@ -43,3 +44,4 @@ export class Cocaine {
         return this._weight;
     }
 }
+/* eslint-enable */

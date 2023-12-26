@@ -1,20 +1,25 @@
-import { ICacheRepository } from "@cocaines/usecases";
-import { Injectable } from "@nestjs/common";
 import Redis from "ioredis";
+import type { ICacheRepository } from "@cocaines/usecases";
+import type { CacheConfigOptions } from "@cocaines/domain";
 
 export type RedisKey = string | Buffer;
 export type RedisValue = string | number | Buffer;
 
-@Injectable()
-export class RedisRepository implements ICacheRepository {
+export class RedisAdapter implements ICacheRepository {
     private readonly redisClient: Redis;
 
-    public constructor(host: string, port: number) {
+    public constructor({ host, port }: CacheConfigOptions) {
         this.redisClient = new Redis({ host, port });
 
-        this.redisClient.once("connecting", () => console.log("⌚ Connecting to Redis...", host, port));
-        this.redisClient.once("connect", () => console.log("🚀 Successfully Connected to Redis!"));
-        this.redisClient.once("error", (err) => console.log("❌ Failed to connect to Redis.", err));
+        this.redisClient.once("connecting", () =>
+            console.log("⌚ Connecting to Redis...", host, port)
+        );
+        this.redisClient.once("connect", () =>
+            console.log("🚀 Successfully Connected to Redis!")
+        );
+        this.redisClient.once("error", (err) =>
+            console.log("❌ Failed to connect to Redis.", err)
+        );
     }
 
     public retrieve(key: RedisKey): Promise<string | null> {

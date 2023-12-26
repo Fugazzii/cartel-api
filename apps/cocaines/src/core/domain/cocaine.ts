@@ -6,10 +6,10 @@ import {
 } from "./errors";
 
 export class Cocaine {
-    private readonly _id: number;
-    private _weight: number;
-    private _price_per_kg: number;
-    private _origin: string;
+    private readonly _id!: number;
+    private _weight!: number;
+    private _price_per_kg!: number;
+    private _origin!: string;
 
     public set setWeight(w: number) {
         if (w > MAX_WEIGHT) {

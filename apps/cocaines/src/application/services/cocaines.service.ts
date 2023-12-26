@@ -1,6 +1,5 @@
 import { Inject, Injectable } from "@nestjs/common";
 
-import type { ProduceCocaineDto } from "@cocaines/usecases";
 import type { Cocaine } from "@cocaines/domain";
 import type {
     ProduceCocaineUseCase,
@@ -10,9 +9,10 @@ import type {
 import { UseCase, IRepository, UseCaseFactory } from "@cocaines/usecases";
 import { CacheProxy } from "./cache-proxy.service";
 import { REPOSITORY_TOKEN } from "@cocaines/common";
+import type { ProduceCocaineDto } from "../dtos/produce-cocaine.dto";
 
 @Injectable()
-export class CocainesService {
+export class CocainesInteractor {
     private readonly produceCocaineUseCase: ProduceCocaineUseCase;
     private readonly traverseWareHouseUseCase: TraverseWarehouseUseCase;
 
@@ -30,7 +30,9 @@ export class CocainesService {
         );
     }
 
-    public produceCocaine(produceCocaineDto: ProduceCocaineDto): Promise<Cocaine> {
+    public produceCocaine(
+        produceCocaineDto: ProduceCocaineDto
+    ): Promise<Cocaine> {
         return this.produceCocaineUseCase.execute(produceCocaineDto);
     }
 

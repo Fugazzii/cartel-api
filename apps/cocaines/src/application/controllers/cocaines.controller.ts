@@ -8,20 +8,24 @@ import {
     Post,
     UsePipes
 } from "@nestjs/common";
-import { CocainesService } from "../services/cocaines.service";
+
 import type { Cocaine } from "@cocaines/domain";
-import { ProduceCocaineDto } from "@cocaines/usecases";
 import type { ApiResponse } from "@cocaines/presentation";
 import { CocainesPresentation } from "@cocaines/presentation";
-import { ProduceCocaineSchema, ProduceCocaineValidationPipe } from "../validation";
+
+import { CocainesInteractor } from "../services/cocaines.service";
+import {
+    ProduceCocaineSchema,
+    ProduceCocaineValidationPipe
+} from "../validation";
+import { ProduceCocaineDto } from "../dtos/produce-cocaine.dto";
 
 @Controller("/")
 export class CocainesController {
-
     public constructor(
         private readonly presentator: CocainesPresentation,
-        private readonly cocaineService: CocainesService
-    ) { }
+        private readonly cocaineService: CocainesInteractor
+    ) {}
 
     @HttpCode(HttpStatus.CREATED)
     @Post("/cocaine")

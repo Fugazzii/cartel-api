@@ -1,2 +1,2 @@
 export * from "./redis.adapter";
-export * from "../../application/providers/redis-repository.provider";
+export * from "../../application/providers/redis-client.provider";

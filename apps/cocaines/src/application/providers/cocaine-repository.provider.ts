@@ -1,5 +1,5 @@
 import type { Provider } from "@nestjs/common";
-import { REPOSITORY_TOKEN } from "@cocaines/common";
+import { POSTGRES_REPOSITORY } from "@cocaines/common";
 import {
     Infrastructure,
     InfrastructureFactory
@@ -17,7 +17,7 @@ export class CocaineRepository {
         if (!CocaineRepository.instance) {
             CocaineRepository.instance = new CocaineRepository();
             CocaineRepository.provider = {
-                provide: REPOSITORY_TOKEN,
+                provide: POSTGRES_REPOSITORY,
                 useValue: InfrastructureFactory.create(Infrastructure.Postgres)
             };
         }

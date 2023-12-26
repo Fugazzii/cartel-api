@@ -7,15 +7,15 @@ import {
     UseCaseFactory
 } from "@cocaines/usecases";
 import type { Cocaine } from "@cocaines/domain";
-import { CACHE_TOKEN, REPOSITORY_TOKEN } from "@cocaines/common";
+import { REDIS_CLIENT, POSTGRES_REPOSITORY } from "@cocaines/common";
 
 @Injectable()
 export class CacheProxy {
     private readonly getOneProductUseCase: GetOneCocaineUseCase;
 
     public constructor(
-        @Inject(CACHE_TOKEN) private readonly cacheService: ICacheRepository,
-        @Inject(REPOSITORY_TOKEN) cocaineRepo: IRepository
+        @Inject(REDIS_CLIENT) private readonly cacheService: ICacheRepository,
+        @Inject(POSTGRES_REPOSITORY) cocaineRepo: IRepository
     ) {
         this.getOneProductUseCase = UseCaseFactory.create(
             UseCase.GetOneProduct,

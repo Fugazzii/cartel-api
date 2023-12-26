@@ -1,2 +1,2 @@
 export * from "./interfaces";
-export * from "./tokens/adapter.tokens";
+export * from "./tokens/provider.tokens";

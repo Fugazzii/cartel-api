@@ -1,5 +1,5 @@
 import { configDotenv } from "dotenv";
-import type { DbConfigOptions, CacheConfigOptions } from "@cocaines/domain";
+import type { DbConfigOptions, CacheConfigOptions, PubSubConfigOptions } from "@cocaines/domain";
 
 configDotenv({
     path: "/usr/src/app/apps/cocaines/.env.dev"
@@ -16,4 +16,9 @@ export const dbConfig: DbConfigOptions = {
 export const cacheConfig: CacheConfigOptions = {
     host: process.env.REDIS_HOST as string,
     port: Number(process.env.REDIS_PORT)
+};
+
+export const pubSubConfig: PubSubConfigOptions = {
+    host: process.env.NATS_HOST as string,
+    port: Number(process.env.NATS_PORT)
 };

@@ -9,7 +9,8 @@ import {
 import { CacheProxy } from "./services/cache-proxy.service";
 
 import { CocaineRepository } from "./providers/cocaine-repository.provider";
-import { RedisRepository } from "./providers/redis-repository.provider";
+import { RedisClient } from "./providers/redis-client.provider";
+import { NatsClient } from "./providers/nats-client.provider";
 
 @Module({
     imports: [PresentationModule.forRoot()],
@@ -19,7 +20,8 @@ import { RedisRepository } from "./providers/redis-repository.provider";
         CocainesPresentation,
         CacheProxy,
         CocaineRepository.getProvider(),
-        RedisRepository.getProvider()
+        RedisClient.getProvider(),
+        NatsClient.getProvider()
     ]
 })
-export class CocainesModule {}
+export class CocainesModule { }

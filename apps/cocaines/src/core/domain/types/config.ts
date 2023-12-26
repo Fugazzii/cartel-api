@@ -10,3 +10,8 @@ export type CacheConfigOptions = {
     host: string;
     port: number;
 };
+
+export type PubSubConfigOptions = {
+    host: string;
+    port: number;
+};

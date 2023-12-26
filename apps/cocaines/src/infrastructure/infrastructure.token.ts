@@ -1,4 +1,5 @@
 export enum Infrastructure {
     Postgres,
-    Redis
+    Redis,
+    Nats
 }

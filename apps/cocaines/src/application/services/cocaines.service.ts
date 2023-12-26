@@ -8,7 +8,7 @@ import type {
 
 import { UseCase, IRepository, UseCaseFactory } from "@cocaines/usecases";
 import { CacheProxy } from "./cache-proxy.service";
-import { REPOSITORY_TOKEN } from "@cocaines/common";
+import { POSTGRES_REPOSITORY } from "@cocaines/common";
 import type { ProduceCocaineDto } from "../dtos/produce-cocaine.dto";
 
 @Injectable()
@@ -17,7 +17,7 @@ export class CocainesInteractor {
     private readonly traverseWareHouseUseCase: TraverseWarehouseUseCase;
 
     public constructor(
-        @Inject(REPOSITORY_TOKEN) cocaineRepo: IRepository,
+        @Inject(POSTGRES_REPOSITORY) cocaineRepo: IRepository,
         private readonly cacheProxy: CacheProxy
     ) {
         this.produceCocaineUseCase = UseCaseFactory.create(

@@ -1,12 +1,12 @@
-import { CACHE_TOKEN } from "@cocaines/common";
+import { REDIS_CLIENT } from "@cocaines/common";
 import {
     Infrastructure,
     InfrastructureFactory
 } from "@cocaines/infrastructure";
 import type { Provider } from "@nestjs/common";
 
-export class RedisRepository {
-    public static instance: RedisRepository | null;
+export class RedisClient {
+    public static instance: RedisClient | null;
     private static provider: Provider;
 
     /* eslint-disable */
@@ -14,13 +14,13 @@ export class RedisRepository {
     /* eslint-enable */
 
     public static getProvider(): Provider {
-        if (!RedisRepository.instance) {
-            RedisRepository.instance = new RedisRepository();
-            RedisRepository.provider = {
-                provide: CACHE_TOKEN,
+        if (!RedisClient.instance) {
+            RedisClient.instance = new RedisClient();
+            RedisClient.provider = {
+                provide: REDIS_CLIENT,
                 useValue: InfrastructureFactory.create(Infrastructure.Redis)
             };
         }
-        return RedisRepository.provider;
+        return RedisClient.provider;
     }
 }
